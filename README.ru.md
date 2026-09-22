@@ -35,6 +35,7 @@
 - [Если что-то не работает](#если-что-то-не-работает)
 - [Состав проекта](#состав-проекта)
 - [Лицензия](#лицензия)
+- [Автор](#автор)
 
 ---
 
@@ -224,6 +225,16 @@ LICENSE                    лицензия MIT
 ## Лицензия
 
 [MIT](LICENSE) — можно свободно использовать, копировать, изменять и распространять, в том числе в коммерческих целях, при условии сохранения уведомления об авторских правах. Программа предоставляется «как есть», без каких-либо гарантий.
+
+## Автор
+
+**Kyrylo Vasylenko**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Kyrylo%20Vasylenko-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/)
+
+LinkedIn: [https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/](https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/)
+
+Вопросы, идеи и сообщения об ошибках — создайте issue или напишите в LinkedIn.
 
 <div align="center">
 <sub>Сделано для настоящего ежемесячного ритуала квартиросъёмщика.</sub>

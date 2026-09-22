@@ -35,6 +35,7 @@
 - [Якщо щось не працює](#якщо-щось-не-працює)
 - [Склад проєкту](#склад-проєкту)
 - [Ліцензія](#ліцензія)
+- [Автор](#автор)
 
 ---
 
@@ -226,6 +227,16 @@ LICENSE                    ліцензія MIT
 ## Ліцензія
 
 [MIT](LICENSE) — можна вільно використовувати, копіювати, змінювати й поширювати, зокрема в комерційних цілях, за умови збереження повідомлення про авторські права. Програма надається «як є», без жодних гарантій.
+
+## Автор
+
+**Kyrylo Vasylenko**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Kyrylo%20Vasylenko-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/)
+
+LinkedIn: [https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/](https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/)
+
+Питання, ідеї та повідомлення про помилки — створіть issue або напишіть у LinkedIn.
 
 <div align="center">
 <sub>Зроблено для справжнього щомісячного ритуалу орендаря.</sub>

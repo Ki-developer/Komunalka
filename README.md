@@ -35,6 +35,7 @@ Runs in your own Google account, works on your phone and computer, speaks Russia
 - [Troubleshooting](#troubleshooting)
 - [Project structure](#project-structure)
 - [License](#license)
+- [Author](#author)
 
 ---
 
@@ -224,6 +225,16 @@ LICENSE                    MIT license
 ## License
 
 [MIT](LICENSE) — free to use, copy, modify and share, including commercially, as long as the copyright notice is kept. The software is provided “as is”, without any warranty.
+
+## Author
+
+**Kyrylo Vasylenko**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Kyrylo%20Vasylenko-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/)
+
+LinkedIn: [https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/](https://www.linkedin.com/in/xg6nwh5sfw-kyr-vas/)
+
+Questions, ideas and bug reports are welcome — open an issue or message me on LinkedIn.
 
 <div align="center">
 <sub>Made for a real renter’s monthly routine.</sub>
