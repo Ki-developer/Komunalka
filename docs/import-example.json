@@ -40,7 +40,8 @@
    "rent": 8000,
    "paid": 2003.34,
    "payDate": "2024-03-20",
-   "payInfo": "Ref. 212288129626"
+   "payInfo": "Ref. 212288129626",
+   "payMethod": "card"
   },
   {
    "month": "2024-03",
@@ -60,7 +61,8 @@
    "rent": 8000,
    "paid": 1701.13,
    "payDate": "2024-04-22",
-   "payInfo": "Ref. 279066020342"
+   "payInfo": "Ref. 279066020342",
+   "payMethod": "card"
   },
   {
    "month": "2024-04",
@@ -79,7 +81,8 @@
    "rent": 8000,
    "paid": 1021.12,
    "payDate": "2024-05-21",
-   "payInfo": "Ref. 497405839480"
+   "payInfo": "Ref. 497405839480",
+   "payMethod": "card"
   },
   {
    "month": "2024-05",
@@ -98,7 +101,8 @@
    "rent": 8000,
    "paid": 986.41,
    "payDate": "2024-06-20",
-   "payInfo": "Ref. 683076784170"
+   "payInfo": "Ref. 683076784170",
+   "payMethod": "card"
   },
   {
    "month": "2024-06",
@@ -118,6 +122,7 @@
    "paid": 1131.4,
    "payDate": "2024-07-20",
    "payInfo": "Ref. 668057164296",
+   "payMethod": "card",
    "note": "Electricity tariff went up to 4.32"
   },
   {
@@ -137,7 +142,8 @@
    "rent": 8000,
    "paid": 1210.27,
    "payDate": "2024-08-21",
-   "payInfo": "Ref. 947636260719"
+   "payInfo": "Ref. 947636260719",
+   "payMethod": "card"
   },
   {
    "month": "2024-08",
@@ -156,7 +162,8 @@
    "rent": 8000,
    "paid": 1127.89,
    "payDate": "2024-09-22",
-   "payInfo": "Ref. 347546633149"
+   "payInfo": "Ref. 347546633149",
+   "payMethod": "card"
   },
   {
    "month": "2024-09",
@@ -175,7 +182,8 @@
    "rent": 8000,
    "paid": 1218.67,
    "payDate": "2024-10-21",
-   "payInfo": "Ref. 365455086226"
+   "payInfo": "Ref. 365455086226",
+   "payMethod": "card"
   },
   {
    "month": "2024-10",
@@ -194,7 +202,8 @@
    "rent": 8000,
    "paid": 1272.02,
    "payDate": "2024-11-21",
-   "payInfo": "Ref. 667794324273"
+   "payInfo": "Ref. 667794324273",
+   "payMethod": "card"
   },
   {
    "month": "2024-11",
@@ -215,6 +224,7 @@
    "paid": 2264.68,
    "payDate": "2024-12-20",
    "payInfo": "Ref. 134315086118",
+   "payMethod": "card",
    "note": "Heating switched on 03.11"
   },
   {
@@ -235,7 +245,8 @@
    "rent": 8000,
    "paid": 2417.95,
    "payDate": "2025-01-23",
-   "payInfo": "Ref. 311566542930"
+   "payInfo": "Ref. 311566542930",
+   "payMethod": "card"
   },
   {
    "month": "2025-01",
@@ -255,7 +266,8 @@
    "rent": 8000,
    "paid": 2556.08,
    "payDate": "2025-02-22",
-   "payInfo": "Ref. 986684091209"
+   "payInfo": "Ref. 986684091209",
+   "payMethod": "card"
   },
   {
    "month": "2025-02",
@@ -275,7 +287,8 @@
    "rent": 8000,
    "paid": 2485.4,
    "payDate": "2025-03-22",
-   "payInfo": "Ref. 187465445125"
+   "payInfo": "Ref. 187465445125",
+   "payMethod": "card"
   },
   {
    "month": "2025-03",
@@ -295,7 +308,8 @@
    "rent": 8000,
    "paid": 2090.07,
    "payDate": "2025-04-21",
-   "payInfo": "Ref. 316767342966"
+   "payInfo": "Ref. 316767342966",
+   "payMethod": "card"
   },
   {
    "month": "2025-04",
@@ -315,6 +329,7 @@
    "paid": 1306.47,
    "payDate": "2025-05-23",
    "payInfo": "Ref. 773881693045",
+   "payMethod": "card",
    "note": "Heating switched off 28.03"
   },
   {
@@ -334,7 +349,8 @@
    "rent": 8000,
    "paid": 1364.31,
    "payDate": "2025-06-23",
-   "payInfo": "Ref. 821164519235"
+   "payInfo": "Handed to the landlord",
+   "payMethod": "cash"
   },
   {
    "month": "2025-06",
@@ -353,7 +369,8 @@
    "rent": 8000,
    "paid": 1225.25,
    "payDate": "2025-07-20",
-   "payInfo": "Ref. 829434262349"
+   "payInfo": "Ref. 829434262349",
+   "payMethod": "card"
   },
   {
    "month": "2025-07",
@@ -372,7 +389,8 @@
    "rent": 8000,
    "paid": 1205.17,
    "payDate": "2025-08-23",
-   "payInfo": "Ref. 885044013168"
+   "payInfo": "Ref. 885044013168",
+   "payMethod": "card"
   },
   {
    "month": "2025-08",
@@ -392,6 +410,7 @@
    "paid": 1245.47,
    "payDate": "2025-09-23",
    "payInfo": "Ref. 297091801534",
+   "payMethod": "card",
    "note": "Rent went up to 10,000"
   },
   {
@@ -411,7 +430,8 @@
    "rent": 10000,
    "paid": 1301.89,
    "payDate": "2025-10-22",
-   "payInfo": "Ref. 980840883459"
+   "payInfo": "Ref. 980840883459",
+   "payMethod": "card"
   },
   {
    "month": "2025-10",
@@ -430,7 +450,8 @@
    "rent": 10000,
    "paid": 1367.57,
    "payDate": "2025-11-23",
-   "payInfo": "Ref. 540075923567"
+   "payInfo": "Ref. 540075923567",
+   "payMethod": "card"
   },
   {
    "month": "2025-11",
@@ -451,6 +472,7 @@
    "paid": 2280.45,
    "payDate": "2025-12-20",
    "payInfo": "Ref. 274911678402",
+   "payMethod": "card",
    "note": "Heating switched on 05.11"
   },
   {
@@ -471,7 +493,8 @@
    "rent": 10000,
    "paid": 2407.32,
    "payDate": "2026-01-21",
-   "payInfo": "Ref. 263327078665"
+   "payInfo": "Ref. 263327078665",
+   "payMethod": "card"
   },
   {
    "month": "2026-01",
@@ -491,7 +514,8 @@
    "rent": 10000,
    "paid": 2608.41,
    "payDate": "2026-02-23",
-   "payInfo": "Ref. 820723438068"
+   "payInfo": "Ref. 820723438068",
+   "payMethod": "card"
   },
   {
    "month": "2026-02",
@@ -511,7 +535,8 @@
    "rent": 10000,
    "paid": 2468.83,
    "payDate": "2026-03-23",
-   "payInfo": "Ref. 269008713362"
+   "payInfo": "Ref. 269008713362",
+   "payMethod": "card"
   },
   {
    "month": "2026-03",
@@ -537,7 +562,8 @@
    "rent": 10000,
    "paid": 2188.27,
    "payDate": "2026-04-21",
-   "payInfo": "Ref. 112976799922"
+   "payInfo": "Ref. 112976799922",
+   "payMethod": "card"
   },
   {
    "month": "2026-04",
@@ -562,7 +588,8 @@
    "rent": 10000,
    "paid": 1400.73,
    "payDate": "2026-05-20",
-   "payInfo": "Ref. 922600401913"
+   "payInfo": "Ref. 922600401913",
+   "payMethod": "card"
   },
   {
    "month": "2026-05",
@@ -587,7 +614,8 @@
    "rent": 10000,
    "paid": 1365.52,
    "payDate": "2026-06-23",
-   "payInfo": "Ref. 335681635341"
+   "payInfo": "Ref. 335681635341",
+   "payMethod": "card"
   },
   {
    "month": "2026-06",
@@ -612,7 +640,8 @@
    "rent": 10000,
    "paid": 1254.55,
    "payDate": "2026-07-21",
-   "payInfo": "Ref. 651014096081"
+   "payInfo": "Ref. 651014096081",
+   "payMethod": "card"
   },
   {
    "month": "2026-07",
@@ -638,6 +667,7 @@
    "paid": 1897.71,
    "payDate": "2026-08-22",
    "payInfo": "Ref. 698114417457",
+   "payMethod": "card",
    "note": "Air conditioner — heat wave"
   },
   {
@@ -663,7 +693,8 @@
    "rent": 10000,
    "paid": 1296.61,
    "payDate": "2026-09-21",
-   "payInfo": "Ref. 489724997658"
+   "payInfo": "Ref. 489724997658",
+   "payMethod": "card"
   },
   {
    "month": "2026-09",

@@ -240,6 +240,7 @@ If you kept your readings in a spreadsheet, you can load them at once: **More â†
       "paid": 1296.61,
       "rent": 10000,
       "payDate": "2026-09-21",
+      "payMethod": "card",
       "payInfo": "Ref. 489724997658",
       "note": "Any text"
     }
@@ -258,6 +259,7 @@ If you kept your readings in a spreadsheet, you can load them at once: **More â†
 | `other` | other costs (optional; if omitted they are calculated as the remainder of `paid`) |
 | `paid` | total paid for utilities (without rent) |
 | `rent` | rent for the month |
+| `payMethod` | how the bill was paid: `card` (card / bank transfer) or `cash` â€” optional |
 | `payDate`, `payInfo`, `note` | payment date (`YYYY-MM-DD`), transaction info, free-text note |
 
 The import file is **not** encrypted â€” delete it after importing.
