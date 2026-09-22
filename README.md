@@ -11,6 +11,7 @@ Runs in your own Google account, works on your phone and computer, speaks Russia
 ![Encryption](https://img.shields.io/badge/encryption-AES--256--GCM-8B5CF6)
 ![No server](https://img.shields.io/badge/server-none%20needed-2ea44f)
 ![Languages](https://img.shields.io/badge/UI-RU%20%7C%20UA%20%7C%20EN-orange)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 **English** · [Русский](README.ru.md) · [Українська](README.uk.md)
 
@@ -33,6 +34,7 @@ Runs in your own Google account, works on your phone and computer, speaks Russia
 - [Updating the app](#updating-the-app)
 - [Troubleshooting](#troubleshooting)
 - [Project structure](#project-structure)
+- [License](#license)
 
 ---
 
@@ -216,7 +218,12 @@ Index.html                 the whole app: interface, charts, encryption, transla
 docs/import-example.json   synthetic history in the import format
 docs/screenshots/          screenshots (demo data): English, Russian, Ukrainian
 docs/logo.svg              logo
+LICENSE                    MIT license
 ```
+
+## License
+
+[MIT](LICENSE) — free to use, copy, modify and share, including commercially, as long as the copyright notice is kept. The software is provided “as is”, without any warranty.
 
 <div align="center">
 <sub>Made for a real renter’s monthly routine.</sub>
