@@ -60,6 +60,7 @@ Komunalka turns that spreadsheet into a small app:
 | 🗓 **Your schedule** | Choose when each meter is entered and when the bill is paid (e.g. water on the 20th, electricity and gas on the 1st of the next month). The home screen shows what is due, overdue or coming up. |
 | ⚡ **Instant calculation** | Consumption, cost per meter, comparison with last month and the same month last year, the “usual” level for the last 12 months. |
 | 🧾 **Bills and payments** | Heating, the total you paid, rent, payment date and transaction number. “Other costs” are calculated automatically as the remainder of the bill. |
+| 🧮 **Itemised “other”** | Break the “other costs” down into your own lines — waste collection, building upkeep, intercom. The total stays the remainder of the bill. |
 | 📎 **Attachments** | Photos and PDFs of bills and receipts with comments. Photos are downsized automatically. |
 | 📊 **Analysis** | Monthly and year-over-year charts, yearly totals, a shared scale for hot and cold water, and automatic checks. |
 | 💱 **Currency** | Hryvnia by default; euro, dollar, złoty, pound and more can be selected in settings. |
@@ -242,6 +243,7 @@ If you kept your readings in a spreadsheet, you can load them at once: **More �
       "heating": 0,
       "paid": 1296.61,
       "rent": 10000,
+      "otherItems": [{ "name": "Waste collection", "sum": 120 }],
       "payDate": "2026-09-21",
       "payMethod": "card",
       "payInfo": "Ref. 489724997658",
@@ -261,8 +263,10 @@ If you kept your readings in a spreadsheet, you can load them at once: **More �
 | `heating` | heating amount on the bill |
 | `other` | other costs (optional; if omitted they are calculated as the remainder of `paid`) |
 | `paid` | total paid for utilities (without rent) |
+| `otherItems` | breakdown of the other costs: `[{ "name": "Waste collection", "sum": 120 }]` — optional, the total is still the remainder |
 | `rent` | rent for the month |
 | `payMethod` | how the bill was paid: `card` (card / bank transfer) or `cash` — optional |
+| `payCard` | where the payment went (card or details) — optional |
 | `payDate`, `payInfo`, `note` | payment date (`YYYY-MM-DD`), transaction info, free-text note |
 
 The import file is **not** encrypted — delete it after importing.

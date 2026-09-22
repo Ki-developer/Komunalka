@@ -641,7 +641,21 @@
    "paid": 1254.55,
    "payDate": "2026-07-21",
    "payInfo": "Ref. 651014096081",
-   "payMethod": "card"
+   "payMethod": "card",
+   "otherItems": [
+    {
+     "name": "Building upkeep",
+     "sum": 341.62
+    },
+    {
+     "name": "Waste collection",
+     "sum": 155.28
+    },
+    {
+     "name": "Intercom",
+     "sum": 124.22
+    }
+   ]
   },
   {
    "month": "2026-07",
@@ -668,6 +682,20 @@
    "payDate": "2026-08-22",
    "payInfo": "Ref. 698114417457",
    "payMethod": "card",
+   "otherItems": [
+    {
+     "name": "Building upkeep",
+     "sum": 346.29
+    },
+    {
+     "name": "Waste collection",
+     "sum": 157.41
+    },
+    {
+     "name": "Intercom",
+     "sum": 125.92
+    }
+   ],
    "note": "Air conditioner — heat wave"
   },
   {
@@ -694,7 +722,21 @@
    "paid": 1296.61,
    "payDate": "2026-09-21",
    "payInfo": "Ref. 489724997658",
-   "payMethod": "card"
+   "payMethod": "card",
+   "otherItems": [
+    {
+     "name": "Building upkeep",
+     "sum": 350.22
+    },
+    {
+     "name": "Waste collection",
+     "sum": 159.19
+    },
+    {
+     "name": "Intercom",
+     "sum": 127.35
+    }
+   ]
   },
   {
    "month": "2026-09",
