@@ -29,6 +29,7 @@ Runs in your own Google account, works on your phone and computer, speaks Russia
 - [How your data is protected](#how-your-data-is-protected)
 - [Installation (≈10 minutes)](#installation-10-minutes)
 - [Everyday use](#everyday-use)
+- [Sharing with family](#sharing-with-family)
 - [Importing your history](#importing-your-history)
 - [Backups and recovery](#backups-and-recovery)
 - [Updating the app](#updating-the-app)
@@ -66,6 +67,7 @@ Komunalka turns that spreadsheet into a small app:
 | 🌍 **Three languages** | Russian, Ukrainian, English — switch at any time. |
 | 📱 **Phone-friendly** | Add it to the home screen; bottom navigation; the browser *Back* button works inside the app. |
 | 🔐 **Private** | AES-256 encryption with your password, auto-lock, access limited to your Google account. |
+| 👨‍👩‍👧 **Family access** | Share the app with the people you live with — everyone signs in with their own Google account, the data stays encrypted. See [Sharing with family](#sharing-with-family). |
 
 ## Screenshots
 
@@ -150,6 +152,75 @@ You need a Google account. It is easiest to do this on a computer.
 4. **A meter was replaced?** Tick *“The meter was replaced this month”* and enter the starting reading of the new meter.
 5. **Look around:** *History* shows everything in a table (tap a row to edit), *Analysis* shows charts and checks.
 
+## Sharing with family
+
+Several people can use the same Komunalka — for example, everyone who lives in the flat. Everybody works with the same data and signs in with their **own Google account**.
+
+### How it works
+
+| | Just you (default) | Family |
+|---|---|---|
+| *Execute as* | Me | User accessing the web app |
+| *Who has access* | Only myself | Anyone with Google account |
+| Who can load the data | only you | only people the spreadsheet is shared with |
+| App password | yours | one password for the whole family |
+
+Apps Script cannot limit a web app to a list of specific people. Instead, the app runs **on behalf of the person who opens it**, and access to the data is controlled by ordinary Google Sheets sharing. Someone who has the link but no access to the spreadsheet cannot load anything — and without the app password the data stays encrypted anyway.
+
+### Step 1. Share the spreadsheet
+
+1. Open the *Komunalka* spreadsheet → **Share** (top right).
+2. Add the Gmail address of each family member and give them the **Editor** role.
+3. Click **Send**. They don’t need to open the spreadsheet itself.
+
+### Step 2. Change the deployment
+
+1. In the spreadsheet: **Extensions → Apps Script**.
+2. **Deploy → Manage deployments** → ✏️ **Edit**.
+3. *Execute as*: **User accessing the web app**.
+4. *Who has access*: **Anyone with Google account**.
+5. *Version*: **New version** → **Deploy**.
+
+The `/exec` link stays the same, bookmarks keep working. Google may ask you to authorize the script once more — the same way as during installation.
+
+### Step 3. Invite the family
+
+1. Send them the `/exec` link.
+2. Tell them the **app password in person** — not in the same message as the link.
+
+### Step 4. First sign-in (each family member)
+
+1. Open the link while **signed in with the Google account the spreadsheet was shared with**.
+2. Google asks for permission → **Authorize access** → choose the account → *“Google hasn’t verified this app”* → **Advanced → Go to Komunalka (unsafe) → Allow**. It is the same script; it can access only this one spreadsheet.
+3. A grey banner *“This application was created by another user, not by Google”* may appear at the top — that is normal.
+4. Enter the app password.
+5. On a phone: browser menu → **Add to Home screen**.
+
+### Security and good practice
+
+- **Give access only to people you trust.** Editors can open the spreadsheet (they see only ciphertext) and the script code — and could damage them.
+- **One password for everyone.** Settings — card, schedule, currency, auto-lock — are shared too. Only the interface language is chosen on each device separately.
+- **Simultaneous edits.** If two people edit the **same month** at the same time, the last save wins. Different months and files don’t interfere. The app reloads the data when you return to it.
+- **Backups** are still made by the owner: *More → Download encrypted backup*.
+
+### Removing someone’s access
+
+1. Spreadsheet → **Share** → next to the person choose **Remove access**.
+2. In the app: **More → Change password**, then give the new password to everyone else.
+
+### Back to “just me”
+
+**Deploy → Manage deployments** → ✏️ → *Execute as*: **Me**, *Who has access*: **Only myself** → *Version*: **New version** → **Deploy**. You can also stop sharing the spreadsheet.
+
+### If it doesn’t work
+
+| Problem | Solution |
+|---|---|
+| *“Could not load data”* or a permission error | The spreadsheet is not shared with this account, or the browser is signed in with a different Google account. |
+| *“Sorry, unable to open the file at this time”* (often on phones) | The browser uses another Google account. Test in an incognito / private window. On Android use a browser signed in only with the right account; on iPhone turn off **Settings → Safari → Prevent Cross-Site Tracking**, or use Chrome or the Google app. |
+| The link opens inside Telegram / Viber | Tap **Open in browser**. |
+| Someone sees an old version | The deployment was not updated to a **New version**. |
+
 ## Importing your history
 
 If you kept your readings in a spreadsheet, you can load them at once: **More → Load history from Excel (.json)**, or the button on the empty home screen. The file format is simple JSON — see [`docs/import-example.json`](docs/import-example.json):
@@ -205,7 +276,7 @@ Paste the new `Code.gs` / `Index.html` into the Apps Script editor → **Save** 
 
 | Problem | Solution |
 |---|---|
-| *“Sorry, unable to open the file at this time”* or another Google error | You are signed in to several Google accounts in this browser. Open the link in a private/incognito window or keep one account signed in. |
+| *“Sorry, unable to open the file at this time”* or another Google error | You are signed in to several Google accounts in this browser. Open the link in a private/incognito window or keep one account signed in. On iPhone also try **Settings → Safari → Prevent Cross-Site Tracking** → off. |
 | The app shows an old version | You saved the code but did not deploy a **new version** — see *Updating the app*. |
 | Blank page after pasting `Index.html` | The file was not pasted completely or is not named exactly `Index`. |
 | Want to try without Google | Open `Index.html` directly in a browser on a computer. It works in *local mode*: data stays in that browser only, without phone access and without file attachments. |
