@@ -39,6 +39,7 @@ function doGet() {
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Комуналка')
+    .addItem('Снять блокировку входа', 'unlockLogin')
     .addItem('Удалить все данные (если забыт пароль)', 'resetAllData')
     .addToUi();
 }
@@ -72,6 +73,15 @@ function api(reqJson) {
     case 'fdel':
       res = withLock_(function () { return fdel_(req.ids, req.salt); });
       break;
+    case 'lockfail':
+      res = withLock_(lockFail_);
+      break;
+    case 'lockok':
+      res = withLock_(lockOk_);
+      break;
+    case 'setlang':
+      res = setLang_(req.lang);
+      break;
     default:
       throw new Error('Неизвестная операция: ' + req.op);
   }
@@ -93,6 +103,7 @@ function resetAllData() {
     clearData_(filesSheet_());
     metaSheet_().getRange(1, 2).setValue('');
   });
+  PropertiesService.getUserProperties().deleteProperty(LOCK_KEY);
   ui.alert('Готово. Откройте приложение и задайте новый пароль.');
 }
 
@@ -111,6 +122,8 @@ function load_() {
   }
   return {
     meta: readMeta_(),
+    lock: lockView_(lockRead_()),
+    lang: PropertiesService.getUserProperties().getProperty(LANG_KEY) || '',
     records: records,
     sheetUrl: SpreadsheetApp.getActiveSpreadsheet().getUrl()
   };
@@ -341,6 +354,70 @@ function checkRecord_(rec) {
 
 function checkFileId_(id) {
   if (!/^f[a-z0-9]{10,40}$/.test(String(id))) throw new Error('bad_file_id');
+}
+
+// ---------------------------------------------------------------- блокировка входа
+// Пароль сервер не видит, поэтому неверный ввод определяет приложение и сообщает сюда.
+// Счётчик хранится в свойствах пользователя: у каждого Google-аккаунта свой,
+// и его нельзя сбросить обновлением страницы или окном инкогнито.
+
+var LOCK_KEY = 'komunalka.lock';
+var LANG_KEY = 'komunalka.lang';
+var LOCK_MAX_FAILS = 5;
+var LOCK_MINUTES = [5, 15, 60];
+
+function lockRead_() {
+  var raw = PropertiesService.getUserProperties().getProperty(LOCK_KEY);
+  var s = {};
+  try {
+    s = raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    s = {};
+  }
+  return { fails: Number(s.fails) || 0, until: Number(s.until) || 0, level: Number(s.level) || 0 };
+}
+
+function lockView_(s) {
+  var now = Date.now();
+  return { fails: s.fails, until: s.until > now ? s.until : 0, now: now, max: LOCK_MAX_FAILS };
+}
+
+function lockFail_() {
+  var s = lockRead_();
+  var now = Date.now();
+  if (s.until > now) return lockView_(s); // уже заблокировано — попытка не считается
+  s.fails += 1;
+  if (s.fails >= LOCK_MAX_FAILS) {
+    s.until = now + LOCK_MINUTES[Math.min(s.level, LOCK_MINUTES.length - 1)] * 60000;
+    s.level += 1;
+    s.fails = 0;
+  }
+  PropertiesService.getUserProperties().setProperty(LOCK_KEY, JSON.stringify(s));
+  return lockView_(s);
+}
+
+function lockOk_() {
+  var v = lockView_(lockRead_());
+  if (v.until) {
+    v.ok = false; // во время блокировки не пускаем даже с верным паролем
+    return v;
+  }
+  PropertiesService.getUserProperties().deleteProperty(LOCK_KEY);
+  return { ok: true, fails: 0, until: 0, now: v.now, max: LOCK_MAX_FAILS };
+}
+
+/** Язык интерфейса запоминается у Google: в Safari внутри фрейма памяти браузера часто нет. */
+function setLang_(lang) {
+  var l = String(lang);
+  if (l !== 'ru' && l !== 'uk' && l !== 'en') throw new Error('bad_lang');
+  PropertiesService.getUserProperties().setProperty(LANG_KEY, l);
+  return { ok: true };
+}
+
+/** Меню таблицы: снять блокировку входа для своего Google-аккаунта. */
+function unlockLogin() {
+  PropertiesService.getUserProperties().deleteProperty(LOCK_KEY);
+  SpreadsheetApp.getUi().alert('Блокировка входа снята — можно снова вводить пароль.');
 }
 
 function withLock_(fn) {

@@ -68,6 +68,7 @@ Komunalka turns that spreadsheet into a small app:
 | 🌍 **Three languages** | Russian, Ukrainian, English — switch at any time. |
 | 📱 **Phone-friendly** | Add it to the home screen; bottom navigation; the browser *Back* button works inside the app. |
 | 🔐 **Private** | AES-256 encryption with your password, auto-lock, access limited to your Google account. |
+| ⏳ **Protection from guessing** | After 5 wrong passwords sign-in pauses for 5 minutes, then longer. |
 | 👨‍👩‍👧 **Family access** | Share the app with the people you live with — everyone signs in with their own Google account, the data stays encrypted. See [Sharing with family](#sharing-with-family). |
 
 ## Screenshots
@@ -110,6 +111,7 @@ flowchart LR
 - **Access is limited to you.** The web app is deployed as *“Execute as: Me / Who has access: Only myself”*, so only your Google account can open it.
 - **Changing the password is instant** — only the small wrapped key is re-encrypted, not all the data.
 - **Auto-lock** after 5–60 minutes of inactivity (10 by default).
+- **Sign-in lockout.** After 5 wrong passwords in a row sign-in is blocked for 5 minutes, then 15 minutes, then an hour. The counter is kept by Google for your account, so reloading the page or a private window does not reset it. To lift it earlier: spreadsheet menu **Комуналка → Снять блокировку входа**.
 - **No external code.** The whole app is one HTML file with no third-party scripts.
 
 > [!WARNING]
@@ -275,6 +277,9 @@ The import file is **not** encrypted — delete it after importing.
 
 Paste the new `Code.gs` / `Index.html` into the Apps Script editor → **Save** → **Deploy → Manage deployments** → ✏️ edit → *Version*: **New version** → **Deploy**. The `/exec` link stays the same.
 
+> [!IMPORTANT]
+> Update **both** files when you update: `Code.gs` too, not only `Index.html`. The sign-in lockout and the remembered interface language live in `Code.gs`.
+
 > [!TIP]
 > The most reliable way to copy a file: open it on GitHub ([Index.html](Index.html)) and click **Copy raw file** (the icon with two squares above the code). In the editor press `Ctrl+A`, `Ctrl+V`, `Ctrl+S`, then `Ctrl+End`: the last line must be `</html>`.
 
@@ -284,6 +289,7 @@ Paste the new `Code.gs` / `Index.html` into the Apps Script editor → **Save** 
 |---|---|
 | *“Sorry, unable to open the file at this time”* or another Google error | You are signed in to several Google accounts in this browser. Open the link in a private/incognito window or keep one account signed in. On iPhone also try **Settings → Safari → Prevent Cross-Site Tracking** → off. |
 | The app shows an old version | You saved the code but did not deploy a **new version** — see *Updating the app*. |
+| *“Too many wrong attempts”* | Wait for the countdown, or open the spreadsheet → menu **Комуналка → Снять блокировку входа**. |
 | Endless *“Loading…”* or the message *“The app did not start: …”* | Update `Index.html` to the latest version (see *Updating the app*): versions released before 22 September 2026 could be broken by Apps Script — details in [For developers](#for-developers). If it happens with the latest version, copy the file again with **Copy raw file**, check that it ends with `</html>` and deploy a new version. The error screen shows the exact line — attach a screenshot when you [open an issue](https://github.com/Ki-developer/Komunalka/issues). |
 | Blank page after pasting `Index.html` | The file was not pasted completely or is not named exactly `Index`. |
 | Want to try without Google | Open `Index.html` directly in a browser on a computer. It works in *local mode*: data stays in that browser only, without phone access and without file attachments. |
