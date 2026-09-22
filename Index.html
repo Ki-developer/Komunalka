@@ -413,10 +413,14 @@ details.tariffs[open] > summary::before { transform: rotate(45deg); }
 .seg.paym button { flex: 1 1 auto; height: 34px; justify-content: center; padding: 0 12px; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .tbl td.pay-how { text-align: left; white-space: nowrap; max-width: 200px; }
 .ph { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-width: 0; vertical-align: middle; }
+.tbl td.pay-how { text-align: center; }
+.tbl td.pay-how .ph-t { display: none; }
+.tbl th.pay-how-h { white-space: normal; width: 62px; }
 .ph-i { flex: none; font-size: 13px; }
 .ph-t { overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
-.tbl td.pay-note { text-align: left; max-width: 250px; }
-.pn { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }
+.tbl td.pay-note { text-align: left; max-width: 132px; }
+.tbl th.pay-note-h { white-space: normal; width: 104px; text-align: left; }
+.pn { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); font-size: 12.5px; font-variant-numeric: tabular-nums; }
 .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .tbl-wrap {
   overflow: auto; max-height: 70vh; border-radius: var(--radius); border: 1px solid var(--line); background: var(--tbl);
@@ -1967,13 +1971,17 @@ function payHow(r) {
   const icon = pm === 'cash' ? '💵' : '💳';
   const text = pm === 'cash' ? payMethodName('cash') : card || payMethodName('card');
   const title = [payMethodName(pm === 'cash' ? 'cash' : 'card'), card].filter(Boolean).join(' · ');
-  return `<span class="ph" title="${esc(title)}">${`<span class="ph-i" aria-hidden="true">${icon}</span>`}<span class="ph-t">${esc(text)}</span></span>`;
+  // в таблице — только значок (всё остальное в подсказке), в карточках на телефоне — с текстом
+  return `<span class="ph" title="${esc(title)}"><span class="ph-i">${icon}</span><span class="ph-t">${esc(text)}</span></span>`;
 }
 
 // Номер операции или комментарий к оплате
 function payNote(r) {
   const info = (r.payInfo || '').trim();
-  return info ? `<span class="pn" title="${esc(info)}">${esc(info)}</span>` : '';
+  if (!info) return '';
+  // в таблице показываем без длинной приписки вида «Номер посилання:» — она видна в подсказке
+  const short = info.replace(/^[^:]{3,30}:\s*/, '');
+  return `<span class="pn" title="${esc(info)}">${esc(short)}</span>`;
 }
 
 function renderEntry(opts = {}) {
@@ -2657,7 +2665,7 @@ function renderHistory() {
     rowFn = c => `<td>${monthCell(c)}</td>${METERS.map(M => `<td class="num ${fcls(c.month, M.k)}" title="${esc(flagged[c.month + M.k] ? T('есть замечание — см. Анализ') : '')}">${isNum(c.cons[M.k]) ? fmt(c.cons[M.k], M.cd) + (c.span[M.k] > 1 ? `<sup title="${T('за {0} мес.', c.span[M.k])}">×${c.span[M.k]}</sup>` : '') : '<span class="muted">—</span>'}${c.r.newMeter && c.r.newMeter[M.k] !== undefined ? ` <span title="${T('новый счётчик')}">🔄</span>` : ''}${stBadge(c, M.k)}</td>`).join('')}<td class="note" title="${esc(c.r.note || '')}">${esc(c.r.note || '')}</td>`;
     yearFn = (y, rows) => `<td>${y}</td>${METERS.map(M => `<td class="num">${fmt(rows.reduce((s, c) => s + (isNum(c.cons[M.k]) ? c.cons[M.k] : 0), 0), yearDec(M.k))}</td>`).join('')}<td></td>`;
   } else if (H.mode === 'money') {
-    head = `<th>${T('Месяц')}</th>${METERS.map(M => `<th>${M.short}</th>`).join('')}<th>${T('Отопл.')}</th><th>${T('Прочие')}</th><th>${T('Коммуналка')}</th><th>${T('Квартплата')}</th><th>${T('Итого')}</th><th>${T('Оплачено')}</th><th style="text-align:left">${T('Как платили')}</th><th style="text-align:left">${T('Номер операции / комментарий')}</th>`;
+    head = `<th>${T('Месяц')}</th>${METERS.map(M => `<th>${M.short}</th>`).join('')}<th>${T('Отопл.')}</th><th>${T('Прочие')}</th><th>${T('Коммуналка')}</th><th>${T('Квартплата')}</th><th>${T('Итого')}</th><th>${T('Оплачено')}</th><th class="pay-how-h">${T('Как платили')}</th><th class="pay-note-h">${T('Номер операции / комментарий')}</th>`;
     rowFn = c => `<td>${monthCell(c)}</td>${METERS.map(M => `<td class="num">${isNum(c.cost[M.k]) ? fmt(c.cost[M.k]) : '<span class="muted">—</span>'}</td>`).join('')}
       <td class="num">${isNum(c.heating) ? fmt(c.heating) : '<span class="muted">—</span>'}</td>
       <td class="num ${fcls(c.month, 'money')} ${c.otherAuto ? 'auto' : ''}" title="${esc([c.otherAuto ? T('остаток: оплачено − счётчики − отопление') : '', ...c.items.map(x => `${x.name || '—'}: ${num(x.sum) !== null ? fmt(num(x.sum)) : '—'}`)].filter(Boolean).join('\n'))}">${isNum(c.other) ? fmt(c.other) : '<span class="muted">—</span>'}</td>
