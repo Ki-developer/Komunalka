@@ -2055,7 +2055,7 @@ function renderEntry(opts = {}) {
           <div class="seg paym" id="e-pm" role="group" aria-labelledby="e-pm-l">${PAY_METHODS.map(k => `<button type="button" data-v="${k}" aria-pressed="${pm === k}">${payMethodName(k)}</button>`).join('')}</div>
           <input type="hidden" name="payMethod" value="${pm}"></div>
         <label class="field"><span id="e-pi-l">${payInfoLabel(pm)}</span><input class="input" name="payInfo" value="${esc(rec.payInfo || '')}" placeholder="${payInfoHint(pm)}"></label>
-        <label class="field"><span>${T('Куда платили')}</span><input class="input" name="payCard" value="${esc(payCard)}" placeholder="${T('например: карта 0000 0000 0000 0000')}"></label>
+        <label class="field" id="e-pc-f" ${pm === 'cash' ? 'hidden' : ''}><span>${T('Куда платили')}</span><input class="input" name="payCard" value="${esc(payCard)}" placeholder="${T('например: карта 0000 0000 0000 0000')}"></label>
       </div>
       <label class="field" style="margin-top:12px"><span>${T('Заметка')}</span><textarea class="input" name="note" placeholder="${T('например: включили отопление 09.11')}">${esc(rec.note || '')}</textarea></label>
     </div>
@@ -2120,6 +2120,7 @@ function renderEntry(opts = {}) {
     $$('#e-pm button', el).forEach(x => x.setAttribute('aria-pressed', String(x.dataset.v === v)));
     el.querySelector('[name=payMethod]').value = v;
     $('#e-pi-l').textContent = payInfoLabel(v);
+    $('#e-pc-f').hidden = v === 'cash';   // наличными — карта не нужна
     el.querySelector('[name=payInfo]').placeholder = payInfoHint(v);
     S.entry.pmSet = true; S.entry.dirty = true; updateEntry();
   }));
@@ -2193,7 +2194,7 @@ function readEntryForm() {
   const paidSigns = 'paid' in rec || rec.payDate || rec.payInfo;
   if (PAY_METHODS.includes(pm) && (S.entry.pmSet || paidSigns)) rec.payMethod = pm;
   const pc = val('payCard').value.trim();
-  if (pc && paidSigns) rec.payCard = pc;
+  if (pc && paidSigns && pm !== 'cash') rec.payCard = pc;
   const items = [];
   $$('#e-oitems .oi-row', el).forEach((row, i) => {
     const name = row.querySelector('.oi-n').value.trim();
