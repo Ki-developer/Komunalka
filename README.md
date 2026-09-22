@@ -35,6 +35,7 @@ Runs in your own Google account, works on your phone and computer, speaks Russia
 - [Updating the app](#updating-the-app)
 - [Troubleshooting](#troubleshooting)
 - [Project structure](#project-structure)
+- [For developers](#for-developers)
 - [License](#license)
 - [Author](#author)
 
@@ -274,12 +275,16 @@ The import file is **not** encrypted — delete it after importing.
 
 Paste the new `Code.gs` / `Index.html` into the Apps Script editor → **Save** → **Deploy → Manage deployments** → ✏️ edit → *Version*: **New version** → **Deploy**. The `/exec` link stays the same.
 
+> [!TIP]
+> The most reliable way to copy a file: open it on GitHub ([Index.html](Index.html)) and click **Copy raw file** (the icon with two squares above the code). In the editor press `Ctrl+A`, `Ctrl+V`, `Ctrl+S`, then `Ctrl+End`: the last line must be `</html>`.
+
 ## Troubleshooting
 
 | Problem | Solution |
 |---|---|
 | *“Sorry, unable to open the file at this time”* or another Google error | You are signed in to several Google accounts in this browser. Open the link in a private/incognito window or keep one account signed in. On iPhone also try **Settings → Safari → Prevent Cross-Site Tracking** → off. |
 | The app shows an old version | You saved the code but did not deploy a **new version** — see *Updating the app*. |
+| Endless *“Loading…”* or the message *“The app did not start: …”* | Update `Index.html` to the latest version (see *Updating the app*): versions released before 22 September 2026 could be broken by Apps Script — details in [For developers](#for-developers). If it happens with the latest version, copy the file again with **Copy raw file**, check that it ends with `</html>` and deploy a new version. The error screen shows the exact line — attach a screenshot when you [open an issue](https://github.com/Ki-developer/Komunalka/issues). |
 | Blank page after pasting `Index.html` | The file was not pasted completely or is not named exactly `Index`. |
 | Want to try without Google | Open `Index.html` directly in a browser on a computer. It works in *local mode*: data stays in that browser only, without phone access and without file attachments. |
 | Tab icon | Set in `Code.gs` (`FAVICON_URL`). Apps Script accepts only a public link to a `.png` image. |
@@ -294,6 +299,22 @@ docs/screenshots/          screenshots (demo data): English, Russian, Ukrainian
 docs/logo.svg              logo
 LICENSE                    MIT license
 ```
+
+## For developers
+
+**Apps Script can cut `//…` out of the page.** When `Index.html` is large, Apps Script sometimes serves it with everything from `//` to the end of the line removed — even inside strings. For example, `'https://calendar…'` became `'https:`, the whole script failed with *Invalid or unexpected token* and the app hung on *Loading…*. So `Index.html` must not contain `//` or `/*` anywhere except in real comments:
+
+- write URLs inside the code as `'https:\/\/…'`;
+- in SVG data URIs use `%2F%2F` (`xmlns='http:%2F%2Fwww.w3.org%2F2000%2Fsvg'`);
+- no regular expressions like `/^image\//` — use `startsWith('image/')`.
+
+Quick check after editing: make a copy with all comments stripped and open it in a browser — the lock screen with the RU / UA / EN switch must appear.
+
+```bash
+python -c "import re; s = open('Index.html', encoding='utf-8').read(); s = re.sub(r'//[^\n]*', '', s); s = re.sub(r'/\*.*?\*/', '', s, flags=re.S); open('stripped.html', 'w', encoding='utf-8').write(s)"
+```
+
+In Apps Script the page is inserted with `document.write`, so line numbers in its errors count from the start of the main `<script>`, not from the start of the file.
 
 ## License
 
