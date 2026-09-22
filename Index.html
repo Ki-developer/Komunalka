@@ -2062,6 +2062,8 @@ function renderEntry(opts = {}) {
         <label class="field"><span>${T('Оплачено за коммуналку, {0}', cur())}</span><input class="input" name="paid" inputmode="decimal" value="${toInput(num(rec.paid))}" placeholder="${T('сумма перевода без квартплаты')}"></label>
         <label class="field"><span>${T('Квартплата (аренда), {0}', cur())}</span><input class="input" name="rent" inputmode="decimal" value="${toInput(num(rec.rent))}">
           <span class="fhint" id="h-rent"></span></label>
+      </div>
+      <div class="form-grid" style="margin-top:14px">
         <label class="field"><span>${T('Дата оплаты')}</span>
           <span style="display:flex;gap:6px"><input class="input" type="date" name="payDate" value="${esc(payDate)}"><button class="btn" type="button" id="e-today">${T('Сегодня')}</button></span></label>
         <div class="field"><span id="e-pm-l">${T('Как платили')}</span>
