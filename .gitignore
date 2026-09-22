@@ -1,0 +1,16 @@
+# Personal data — never commit
+история_из_excel.json
+*история*.json
+komunalka_backup_*.json
+komunalka_*.csv
+komunalka-napominaniya.ics
+ИНСТРУКЦИЯ.txt
+*.xlsx
+
+# Local tooling
+.claude/
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
