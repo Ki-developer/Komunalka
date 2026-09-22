@@ -3210,9 +3210,13 @@ async function importRows(rows, source) {
     (clash ? `${T('\n{0} из них уже есть — они будут заменены данными из файла.', clash)}` : '') + T('\n\nЗагрузить?');
   if (!confirm(msg)) return false;
   toast(T('Шифрование и загрузка…'), 10000);
-  const list = valid.map(r => ({ rec: r }));
+  const list = valid.map(r => {
+    const old = S.rows[r.month];
+    // прикреплённых файлов в файле загрузки нет — оставляем те, что уже есть в месяце
+    return { rec: old && old.files && old.files.length && !r.files ? { ...r, files: old.files } : r };
+  });
   for (let i = 0; i < list.length; i += 60) await saveRecords(list.slice(i, i + 60));
-  valid.forEach(r => (S.rows[r.month] = r));
+  list.forEach(x => (S.rows[x.rec.month] = x.rec));
   recompute();
   toast(`${T('Загружено: {0} мес. ✓', valid.length)}`);
   return true;
